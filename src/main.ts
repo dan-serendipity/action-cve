@@ -32,9 +32,18 @@ async function run(): Promise<void> {
     const count = parseInt(getInput('count'))
     const severity = getInput('severity')
     const manifest = getInput('manifest')
-    const owner = context.repo.owner
-    const repo = context.repo.repo
-    const alerts = await fetchAlerts(token, repo, owner, severity, manifest, count)
+    // const owner = context.repo.owner
+    // const repo = context.repo.repo
+    const owner = 'kunalnagar'
+    const repo = 'cve-base'
+    const alerts = await fetchAlerts(
+      token,
+      repo,
+      owner,
+      severity,
+      manifest,
+      count,
+    )
     if (alerts.length > 0) {
       if (microsoftTeamsWebhookUrl) {
         await sendAlertsToMicrosoftTeams(microsoftTeamsWebhookUrl, alerts)
